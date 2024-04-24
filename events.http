@@ -1,3 +1,14 @@
+
+# create .env file with the following content
+
+# clientid=YOUR_OWN_API_KEY
+# secret=YOUR_OWN_API_SECRET
+# auth_url=https://cloudinfra-gw.portal.checkpoint.com/auth/external
+
+
+
+
+
 # @name login
 
 @clientid={{$dotenv clientid}}
