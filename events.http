@@ -1,0 +1,59 @@
+# @name login
+
+@clientid={{$dotenv clientid}}
+@secret={{$dotenv secret}}
+
+POST https://cloudinfra-gw.portal.checkpoint.com/auth/external
+Content-Type: application/json
+
+{
+    "clientId": "{{clientid}}",
+  "accessKey": "{{secret}}"
+}
+
+###
+
+# curl -X 'POST' \
+#   'https://virtserver.swaggerhub.com/Check-Point/infinity-events-api/1.0.0/logs_query' \
+#   -H 'accept: application/json' \
+#   -H 'Content-Type: application/json' \
+#   -d '{
+#   "filter": "src:\"1.1.1.1\" AND severity:\"Critical\"",
+#   "limit": 100,
+#   "pageLimit": 100,
+#   "cloudService": "Harmony Connect",
+#   "timeframe": {
+#     "startTime": "2022-01-01T05:00:00Z",
+#     "endTime": "2022-01-30T21:59:59Z"
+#   },
+#   "accounts": [
+#     "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+#   ]
+# }'
+
+# @name getLogs
+POST https://cloudinfra-gw.portal.checkpoint.com/app/laas-logs-api/api/logs_query
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.data.token}}
+
+{
+    "filter": "severity:\"Critical\"",
+  "limit": 100,
+  "pageLimit": 100,
+
+  "timeframe": {
+    "startTime": "2024-01-01T05:00:00Z",
+    "endTime": "2024-06-30T21:59:59Z"
+  },
+  "accounts": [
+    "72d56f5b-6855-4d69-aa56-26eb9ff611d2"
+  ]
+}
+
+###
+@taskId = {{getLogs.response.body.data.taskId}}
+GET https://cloudinfra-gw.portal.checkpoint.com/app/laas-logs-api/api/logs_query/{{taskId}}
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.data.token}}
+
+###
