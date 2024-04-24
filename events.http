@@ -23,6 +23,7 @@ Authorization: Bearer {{login.response.body.data.token}}
     "filter": "ci_app_name:\"CloudGuard Application Security\" AND severity:\"Critical\"",
   "limit": 100,
   "pageLimit": 100,
+  "cloudService": "CloudGuard AppSec",
   "timeframe": {
     "startTime": "2024-04-20T05:00:00Z",
     "endTime": "2024-06-30T21:59:59Z"
