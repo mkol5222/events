@@ -37,12 +37,11 @@ Content-Type: application/json
 Authorization: Bearer {{login.response.body.data.token}}
 
 {
-    "filter": "severity:\"Critical\"",
+    "filter": "ci_app_name:\"CloudGuard Application Security\" AND severity:\"Critical\"",
   "limit": 100,
   "pageLimit": 100,
-
   "timeframe": {
-    "startTime": "2024-01-01T05:00:00Z",
+    "startTime": "2024-04-20T05:00:00Z",
     "endTime": "2024-06-30T21:59:59Z"
   },
   "accounts": [
@@ -51,9 +50,21 @@ Authorization: Bearer {{login.response.body.data.token}}
 }
 
 ###
+
+# @name logQuery
+
 @taskId = {{getLogs.response.body.data.taskId}}
 GET https://cloudinfra-gw.portal.checkpoint.com/app/laas-logs-api/api/logs_query/{{taskId}}
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.data.token}}
 
 ###
+
+POST https://cloudinfra-gw.portal.checkpoint.com/app/laas-logs-api/api/logs_query/retrieve
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.data.token}}
+
+{
+  "taskId": "{{getLogs.response.body.data.taskId}}",
+  "pageToken": "{{logQuery.response.body.data.pageTokens[0]}}"
+}
