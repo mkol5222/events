@@ -26,6 +26,9 @@ Content-Type: application/json
 
 
 # @name getLogs
+
+#  "cloudService": "CloudGuard AppSec",
+
 POST https://cloudinfra-gw.portal.checkpoint.com/app/laas-logs-api/api/logs_query
 Content-Type: application/json
 Authorization: Bearer {{login.response.body.data.token}}
@@ -34,13 +37,12 @@ Authorization: Bearer {{login.response.body.data.token}}
     "filter": "ci_app_name:\"CloudGuard Application Security\" AND severity:\"Critical\"",
   "limit": 100,
   "pageLimit": 100,
-  "cloudService": "CloudGuard AppSec",
   "timeframe": {
-    "startTime": "2024-04-20T05:00:00Z",
+    "startTime": "2024-04-01T05:00:00Z",
     "endTime": "2024-06-30T21:59:59Z"
   },
   "accounts": [
-    "72d56f5b-6855-4d69-aa56-26eb9ff611d2"
+    "1d81c053-490f-460e-993d-284ec143aa42"
   ]
 }
 
